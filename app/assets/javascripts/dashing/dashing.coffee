@@ -14,5 +14,9 @@ Dashing.on 'ready', ->
       widget_base_dimensions: Dashing.widget_base_dimensions
       avoid_overlapped_widgets: !Dashing.customGridsterLayout
       draggable:
-        stop: Dashing.showGridsterInstructions
-        start: -> Dashing.currentWidgetPositions = Dashing.getWidgetPositions()
+        stop: ->
+          Dashing.showGridsterInstructions()
+          Dashing.draggableStopCallback() if Dashing.draggableStopCallback?
+        start: ->
+          Dashing.currentWidgetPositions = Dashing.getWidgetPositions()
+          Dashing.draggableStartCallback() if Dashing.draggableStartCallback?
